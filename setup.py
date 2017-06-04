@@ -1,11 +1,14 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
-from src import __version__
+
+VERSION = open('VERSION').read()
 
 setup(
     name='roda',
-    version=__version__,
-    packages=find_packages(),
+    version=VERSION,
+    packages=['roda'],
+    package_dir={'': 'src'},
+    include_package_data=True,
     install_requires=['nose'],
     author='x6doooo',
     author_email='x6doooo@gmail.com',

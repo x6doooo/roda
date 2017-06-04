@@ -20,6 +20,7 @@ class Context:
         self.benchmark_rate_daily = []
 
     def order(self, code, position, price):
+
         # 有持仓取出持仓，无持仓设为空持仓
         if code in self.store:
             record = self.store[code]
@@ -98,8 +99,8 @@ class Context:
         '''
         value = self.cash
         for code in list(self.store.keys()):
-            _, _, _, current_close = self.data_provider.load_price_by_date(code, self.current_date)
-            value += current_close * self.store[code].volume
+            quote = self.data_provider.load_quote_by_date(code, self.current_date)
+            value += quote.close * self.store[code].volume
         self.rate_daily.append(RateRecord(self.current_date, value / self.init_cash))
 
 
@@ -108,11 +109,11 @@ class Context:
         统计当前benchmark的收益率
         :return: None
         '''
-        _, _, _, current_close = self.data_provider.load_price_by_date(self.benchmark, self.current_date)
+        quote = self.data_provider.load_quote_by_date(self.benchmark, self.current_date)
 
         # 没有初始值的时候，以当前值初始化一下
         if self.benchmark_init_value is None:
-            self.benchmark_rate_daily = current_close
+            self.benchmark_init_value = quote.close
 
-        self.benchmark_rate_daily.append(RateRecord(self.current_date, current_close / self.benchmark_rate_daily))
+        self.benchmark_rate_daily.append(RateRecord(self.current_date, quote.close / self.benchmark_init_value))
 
