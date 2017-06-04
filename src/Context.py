@@ -115,18 +115,4 @@ class Context:
             self.benchmark_rate_daily = current_close
 
         self.benchmark_rate_daily.append(RateRecord(self.current_date, current_close / self.benchmark_rate_daily))
-        pass
-
-
-
-
-
-# 把自己制作的Python包发布到PyPI
-# http://blog.topspeedsnail.com/archives/7380
-
-# 定义接口或者抽象基类
-# http://python3-cookbook.readthedocs.io/zh_CN/latest/c08/p12_define_interface_or_abstract_base_class.html
-
-# Python包分发详解
-# https://xuanwo.org/2015/11/03/python-packages/
 
