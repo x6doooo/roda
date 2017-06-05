@@ -9,7 +9,7 @@ setup(
     packages=['roda'],
     package_dir={'': 'src'},
     include_package_data=True,
-    install_requires=['nose'],
+    install_requires=['nose', 'talib', 'numpy'],
     author='x6doooo',
     author_email='x6doooo@gmail.com',
     description='...',

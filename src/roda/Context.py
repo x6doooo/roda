@@ -8,15 +8,28 @@ RateRecord = namedtuple('RateRecord', ['date', 'value'])
 class Context:
 
     def __init__(self, benchmark, data_provider, init_cash = 1000 * 1000):
+        # 数据接口类，实现DataProvider类的接口方法
         self.data_provider = data_provider
+        # 当前日期，context会被放入run函数中循环一个时间段，current_date字段会被赋值为当前时间
         self.current_date = None
+
+        # 初始现金，用于计算受益
         self.init_cash = init_cash
+        # 现金，用于交易
         self.cash = init_cash
+
+        # 参照股，用于对比受益率
         self.benchmark = benchmark
+        # 参照股的初始价值，用于计算参照收益率
         self.benchmark_init_value = None
+
+        # 交易记录
         self.deals = []
+        # 持仓
         self.store = {}
+        # 每天的收益率
         self.rate_daily = []
+        # 参照股的每天收益率
         self.benchmark_rate_daily = []
 
     def order(self, code, position, price):
