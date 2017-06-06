@@ -26,13 +26,22 @@ class DataProvider(metaclass=ABCMeta):
 
     def load_previous_quotes(self, code, end_date, previous_num):
         '''
-        获取end_date之前previous_num个数据点
+        获取end_date之前previous_num个数据点(包括end_date)
         :param code:
         :param end_date:
         :param previous_num:
         :return: namedtuple(open, high, low, close, volume, dates)
         '''
         pass
+
+    def load_next_quotes(self, code, start_date, next_num):
+        '''
+        获取start_date及以后的next_num个数据点
+        :param code:
+        :param start_date:
+        :param next_num:
+        :return:
+        '''
 
 
 
