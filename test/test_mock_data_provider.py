@@ -64,7 +64,7 @@ def read_data_from_csv(name):
     }
 
 
-Quote = namedtuple('quote', ['open', 'high', 'low', 'close', 'volume'])
+Quote = namedtuple('quote', ['date', 'open', 'high', 'low', 'close', 'volume'])
 
 
 class MockDataProvider(DataProvider):
@@ -84,7 +84,8 @@ class MockDataProvider(DataProvider):
 
     def quote_range(self, code, idx_start, idx_end):
         data = self.data_dict[code]
-        return Quote(data['open'][idx_start:idx_end],
+        return Quote(data['date'][idx_start:idx_end],
+                     data['open'][idx_start:idx_end],
                      data['high'][idx_start:idx_end],
                      data['low'][idx_start:idx_end],
                      data['close'][idx_start:idx_end],
@@ -100,8 +101,13 @@ class MockDataProvider(DataProvider):
         return self.quote_range(code, idx_start, idx_end)
 
     def load_previous_quotes(self, code, end_date, previous_num):
-        idx_end = self.find_date_idx(code, end_date)
+        idx_end = self.find_date_idx(code, end_date) + 1
         idx_start = idx_end - previous_num
+        return self.quote_range(code, idx_start, idx_end)
+
+    def load_next_quotes(self, code, start_date, next_num):
+        idx_start = self.find_date_idx(code, start_date)
+        idx_end = idx_start + next_num
         return self.quote_range(code, idx_start, idx_end)
 
 
