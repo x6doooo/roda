@@ -1,0 +1,4 @@
+nose
+talib
+numpy
+pymongo
