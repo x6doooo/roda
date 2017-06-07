@@ -9,11 +9,11 @@ from conf import *
 
 def test_run():
 
-    start_date = '2013-06-17'
+    start_date = '2014-12-17'
     end_date = '2017-05-30'
     # data_provider = MockDataProvider()
     data_provider = MongoDataProvider(conf['mongo'])
-    data_provider.preload(['AMD', 'NVDA'], start_date, end_date)
+    data_provider.preload(['JCP'], start_date, end_date)
     run(StrategyDmi, data_provider, start_date, end_date)
 
 

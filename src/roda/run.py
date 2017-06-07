@@ -16,7 +16,7 @@ def run(StrategyWillBeBackTest, data_provider, start_date, end_date):
 
         ctx.statics()
 
-    deals_df = pd.DataFrame.from_records(ctx.deals)
+    deals_df = pd.DataFrame(ctx.deals)
 
     print(deals_df)
     print('总收益率:', round(ctx.rate_daily[-1] * 100, 2), '%')

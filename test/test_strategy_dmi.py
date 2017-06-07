@@ -4,11 +4,11 @@ import talib
 
 class StrategyDmi(Strategy):
     def __init__(self, ctx):
-        ctx.benchmark = 'NVDA'
+        ctx.benchmark = 'JCP'
 
     def handle_bar(self, ctx):
 
-        code = 'AMD'
+        code = 'JCP'
 
         adx_period = 14
         short_ma_num = 5
